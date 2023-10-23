@@ -2,11 +2,22 @@
 
   import java.util.function.Function;
 
-  public class MyList {
-    public void add(Object o) {
-      throw new RuntimeException("Not implemented");
-    }
 
+    public class MyList<T extends Number> {
+      private final int STARTING_CAPACITY=10;
+      private Object[] data;
+      private int size;
+
+      public MyList() {
+        this.data = new Object[STARTING_CAPACITY]; // начальная емкость
+        this.size = 0;
+      }
+      public void add(T element) {
+        if (size == data.length) {
+          resize();
+        }
+        data[size++] = element;
+      }
     public Object get(int index) {
       throw new RuntimeException("Not implemented");
     }
