@@ -1,7 +1,9 @@
   package org.example;
 
+  import java.util.Arrays;
   import java.util.Iterator;
   import java.util.NoSuchElementException;
+  import java.util.Objects;
   import java.util.function.Function;
 
 
@@ -41,8 +43,8 @@
      exception.printStackTrace();
      throw exception;}
      T removed=(T) data[index];
-     System.arraycopy(data,index++,data,index,size-index-1);
-     data[size--]=null;
+     System.arraycopy(data,index+1,data,index,size-index-1);
+     data[--size]=null;
      return removed;
     }
 
@@ -63,6 +65,10 @@
         public Iterator<T> iterator() {
             return new MyListIterator();
         }
+        /** Статическим InnerClass просто показывает принадлежность к внешнему классу
+         *  и имеет доступ только к статическим переменным внешнего класса.
+         *  Не статический InnerClass уместно использовать для обслуживания внешнего класса, но нужно контролировать
+         *  соблюдение принципа единственной ответственности (Single Responsibility Principle).*/
 
         private class MyListIterator implements Iterator<T>{
           private int currentIndex=0;
@@ -81,14 +87,45 @@
             }
         }
 
-        public static void main(String[] args) {
-            MyList<Integer> list=new MyList<>();
-            list.add(1);
-            list.add(2);
-            list.add(3);
-            MyList<Integer> newList = list.map(x -> x * 1000);
-            for (Object x:newList) {
-                System.out.println(x);
-            }
+        @Override
+        public String toString() {
+            return  Arrays.toString(data);
+
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            MyList<?> list = (MyList<?>) o;
+
+
+        if (list==null||this==null||size != list.size) return false;
+
+            for (int i = 0; i <size ; i++) {
+                if (!list.get(i).equals(this.get(i)))
+                    return false;
+            }
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+
+            try {
+                if(this==null) return 0;
+            } catch (NullPointerException e) {
+                return 0;
+            }
+
+            int result = Arrays.hashCode(data);
+            result = 31 * result + size;
+            return result;
+        }
+
+        public static void main(String[] args) {
+
+        }
+
   }
