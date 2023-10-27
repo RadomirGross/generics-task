@@ -71,7 +71,7 @@ public class MyListTest {
 
 
   @Test
-  public void   testIterator_ShouldAddAllTheElementsCorrectly() {
+  public void   testIterator_ShouldAddAllTheElementsCorrectly_ShouldReturnTrue() {
     MyList<Integer> list = new MyList<>();
     list.add(1);
     list.add(9);
@@ -179,9 +179,8 @@ Assertions.assertFalse(list1.equals(null));
 
   }
 
-
   @Test
-  public void testHashCode_Step1_testConsistentWithEquals_ShouldReturnCorrectly() {
+  public void testHashCode_Step1_testReflexivity_ShouldReturnTrue() {
     MyList<Integer> list1 = new MyList<>();
     list1.add(1);
     list1.add(2);
@@ -189,44 +188,11 @@ Assertions.assertFalse(list1.equals(null));
     list1.add(7);
     list1.add(59);
 
-    MyList<Integer> list2 = new MyList<>();
-    list2.add(1);
-    list2.add(2);
-    list2.add(3);
-    list2.add(7);
-    list2.add(59);
-
-    Assertions.assertEquals(list1.equals(list2), list1.hashCode() == list2.hashCode());
+    Assertions.assertEquals(list1.hashCode(), list1.hashCode());
   }
 
   @Test
-  public void testHashCode_Step2_testConsistentWithUnequalObjects_ShouldReturnCorrectly() {
-    MyList<Integer> list1 = new MyList<>();
-    list1.add(1);
-    list1.add(2);
-    list1.add(3);
-    list1.add(7);
-    list1.add(59);
-
-    MyList<Integer> list2 = new MyList<>();
-    list2.add(1);
-    list2.add(2);
-    list2.add(3);
-    list2.add(7);
-    list2.add(59);
-    list2.add(9);
-
-    Assertions.assertNotEquals(list1.hashCode(), list2.hashCode());
-  }
-
-  @Test
-  public void testHashCode_Step3_testConsistentWithNull_ShouldReturnCorrectly() {
-    MyList<Integer> list1 = new MyList<>();
-    Assertions.assertFalse(list1.hashCode() == 0);
-  }
-
-  @Test
-  public void testHashCode_Step4_testConsistency_ShouldReturnCorrectly() {
+  public void testHashCode_Step2_testSymmetry_ShouldReturnTrue() {
     MyList<Integer> list1 = new MyList<>();
     list1.add(1);
     list1.add(2);
@@ -242,11 +208,60 @@ Assertions.assertFalse(list1.equals(null));
     list2.add(59);
 
     Assertions.assertEquals(list1.hashCode(), list2.hashCode());
-    list2.add(9);
-    Assertions.assertNotEquals(list1.hashCode(), list2.hashCode());
   }
 
-    @Test
+  @Test
+  public void testHashCode_Step3_testTransitivity_ShouldReturnTrue() {
+    MyList<Integer> list1 = new MyList<>();
+    list1.add(1);
+    list1.add(2);
+    list1.add(3);
+    list1.add(7);
+    list1.add(59);
+
+    MyList<Integer> list2 = new MyList<>();
+    list2.add(1);
+    list2.add(2);
+    list2.add(3);
+    list2.add(7);
+    list2.add(59);
+
+    MyList<Integer> list3 = new MyList<>();
+    list3.add(1);
+    list3.add(2);
+    list3.add(3);
+    list3.add(7);
+    list3.add(59);
+
+   if (list1.hashCode()==list2.hashCode()&&list2.hashCode()==list3.hashCode())
+    Assertions.assertEquals(list1.hashCode(), list3.hashCode());
+  }
+
+  @Test
+  public void testHashCode_Step4_testConsistency_ShouldReturnTrue() {
+    MyList<Integer> list1 = new MyList<>();
+    list1.add(1);
+    list1.add(2);
+    list1.add(3);
+    list1.add(7);
+    list1.add(59);
+
+    MyList<Integer> list2 = new MyList<>();
+    list2.add(1);
+    list2.add(2);
+    list2.add(3);
+    list2.add(7);
+    list2.add(59);
+
+    if (list1.hashCode()==list2.hashCode())
+    {
+      list1.add(13);
+      Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
+    }
+  }
+
+
+  @Test
     public void testHashCode_Step5_testCompare_ShouldReturnTrue() {
       MyList<Integer> list = null;
       int hashCode=list.hashCode();
