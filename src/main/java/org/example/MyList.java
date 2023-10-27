@@ -113,11 +113,11 @@
         @Override
         public int hashCode() {
 
-            try {
+
                 if(this==null) return 0;
-            } catch (NullPointerException e) {
+
                 return 0;
-            }
+
 
             int result = Arrays.hashCode(data);
             result = 31 * result + size;
