@@ -219,7 +219,7 @@ Assertions.assertFalse(list1.equals(null));
   }
 
   @Test
-  public void testHashCode_Step3_ShouldReturnFalse() {
+  public void testHashCode_Step3_ShouldReturnTrue() {
    /* It is not required that if two objects are unequal according to the equals method,
     then calling the hashCode method on each of the two objects must produce distinct integer results.
     However, the programmer should be aware that producing
