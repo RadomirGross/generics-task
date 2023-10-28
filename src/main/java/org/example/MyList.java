@@ -101,9 +101,8 @@
             MyList<?> list = (MyList<?>) o;
 
 
-        if (list==null||this==null||size != list.size) return false;
-
-            for (int i = 0; i <size ; i++) {
+        if (size != list.size) return false;
+        for (int i = 0; i <size ; i++) {
                 if (!list.get(i).equals(this.get(i)))
                     return false;
             }
@@ -112,7 +111,7 @@
 
         @Override
         public int hashCode() {
-            if(this==null) return 0;
+
             if (data==null) return 0;
             int result = Arrays.hashCode(data);
             result = 31 * result + size;

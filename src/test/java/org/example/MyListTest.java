@@ -180,7 +180,11 @@ Assertions.assertFalse(list1.equals(null));
   }
 
   @Test
-  public void testHashCode_Step1_testReflexivity_ShouldReturnTrue() {
+  public void testHashCode_Step1_ShouldReturnTrue() {
+  /*  Whenever it is invoked on the same object more than once during an execution of a Java application,
+    the hashCode method must consistently return the same integer, provided no information used in equals
+    comparisons on the object is modified. This integer need not remain consistent from one execution of an
+    application to another execution of the same application.*/
     MyList<Integer> list1 = new MyList<>();
     list1.add(1);
     list1.add(2);
@@ -189,10 +193,14 @@ Assertions.assertFalse(list1.equals(null));
     list1.add(59);
 
     Assertions.assertEquals(list1.hashCode(), list1.hashCode());
+    Assertions.assertEquals(list1.hashCode(), list1.hashCode());
+    Assertions.assertEquals(list1.hashCode(), list1.hashCode());
   }
 
   @Test
-  public void testHashCode_Step2_testSymmetry_ShouldReturnTrue() {
+  public void testHashCode_Step2_ShouldReturnTrue() {
+   /* If two objects are equal according to the equals method, then calling the hashCode method on each of
+    the two objects must produce the same integer result.*/
     MyList<Integer> list1 = new MyList<>();
     list1.add(1);
     list1.add(2);
@@ -206,12 +214,16 @@ Assertions.assertFalse(list1.equals(null));
     list2.add(3);
     list2.add(7);
     list2.add(59);
-
-    Assertions.assertEquals(list1.hashCode(), list2.hashCode());
+    if (list1.equals(list2))
+      Assertions.assertEquals(list1.hashCode(), list2.hashCode());
   }
 
   @Test
-  public void testHashCode_Step3_testTransitivity_ShouldReturnTrue() {
+  public void testHashCode_Step3_ShouldReturnFalse() {
+   /* It is not required that if two objects are unequal according to the equals method,
+    then calling the hashCode method on each of the two objects must produce distinct integer results.
+    However, the programmer should be aware that producing
+    distinct integer results for unequal objects may improve the performance of hash tables.*/
     MyList<Integer> list1 = new MyList<>();
     list1.add(1);
     list1.add(2);
@@ -220,54 +232,20 @@ Assertions.assertFalse(list1.equals(null));
     list1.add(59);
 
     MyList<Integer> list2 = new MyList<>();
-    list2.add(1);
-    list2.add(2);
-    list2.add(3);
-    list2.add(7);
     list2.add(59);
-
-    MyList<Integer> list3 = new MyList<>();
-    list3.add(1);
-    list3.add(2);
-    list3.add(3);
-    list3.add(7);
-    list3.add(59);
-
-   if (list1.hashCode()==list2.hashCode()&&list2.hashCode()==list3.hashCode())
-    Assertions.assertEquals(list1.hashCode(), list3.hashCode());
-  }
-
-  @Test
-  public void testHashCode_Step4_testConsistency_ShouldReturnTrue() {
-    MyList<Integer> list1 = new MyList<>();
-    list1.add(1);
-    list1.add(2);
-    list1.add(3);
-    list1.add(7);
-    list1.add(59);
-
-    MyList<Integer> list2 = new MyList<>();
-    list2.add(1);
-    list2.add(2);
+    list2.add(0);
+    list2.add(77);
     list2.add(3);
-    list2.add(7);
-    list2.add(59);
+    list2.add(19);
 
-    if (list1.hashCode()==list2.hashCode())
-    {
-      list1.add(13);
-      Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
-    }
+    Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
+    Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
+    Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
+
+
   }
 
 
-  @Test
-    public void testHashCode_Step5_testCompare_ShouldReturnTrue() {
-      MyList<Integer> list = null;
-      int hashCode=list.hashCode();
-      int expected=0;
-      Assertions.assertEquals(expected,hashCode );
-    }
   }
 
 
