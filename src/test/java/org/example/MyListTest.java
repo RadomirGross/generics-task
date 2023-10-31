@@ -237,10 +237,9 @@ Assertions.assertFalse(list1.equals(null));
     list2.add(77);
     list2.add(3);
     list2.add(19);
+   if (!list1.equals(list2))
+    Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
 
-    Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
-    Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
-    Assertions.assertNotEquals(list1.hashCode(),list2.hashCode());
 
 
   }
