@@ -9,6 +9,7 @@
 
     public class MyList<T extends Number> implements Iterable{
       private final int STARTING_CAPACITY=10;
+      private final int MULTIPLY_FOR_INCREASE_ARRAY=2;
       private Object[] data;
       private int size;
 
@@ -32,7 +33,7 @@
 
     private void resize() {
 
-       Object[] newdata=new Object[size*2];
+       Object[] newdata=new Object[size*MULTIPLY_FOR_INCREASE_ARRAY];
        System.arraycopy(data,0,newdata,0,data.length);
        data=newdata;
     }
@@ -65,7 +66,7 @@
         public Iterator<T> iterator() {
             return new MyListIterator();
         }
-        /** Статическим InnerClass просто показывает принадлежность к внешнему классу
+        /** Статическим NestedClass просто показывает принадлежность к внешнему классу
          *  и имеет доступ только к статическим переменным внешнего класса.
          *  Не статический InnerClass уместно использовать для обслуживания внешнего класса, но нужно контролировать
          *  соблюдение принципа единственной ответственности (Single Responsibility Principle).*/
