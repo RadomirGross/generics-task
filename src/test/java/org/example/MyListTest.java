@@ -61,11 +61,11 @@ public class MyListTest {
     list.add(33);
     list.add(31);
     list.add(999);
-    MyList<Integer> newList = list.map(x -> x * 1000);
+    MyList<Double> newList = list.map(x -> x * 1.2);
     Assertions.assertEquals(3, newList.size());
-    Assertions.assertEquals(Integer.valueOf(33000), newList.get(0));
-    Assertions.assertEquals(Integer.valueOf(31000), newList.get(1));
-    Assertions.assertEquals(Integer.valueOf(999000), newList.get(2));
+    Assertions.assertEquals(Double.valueOf(33*1.2), newList.get(0));
+    Assertions.assertEquals(Double.valueOf(31*1.2), newList.get(1));
+    Assertions.assertEquals(Double.valueOf(999*1.2), newList.get(2));
   }
 
 
